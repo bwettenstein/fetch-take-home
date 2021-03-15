@@ -9,9 +9,9 @@ const transactions = [
 ];
 
 const balance = {
-  'Dannon': 1000,
-  'UNILEVER': 0,
-  'MILLER COORS': 5300,
+  'DANNON': 1100,
+  'UNILEVER': 200,
+  'MILLER COORS': 10000,
 };
 
 module.exports = { transactions, balance };
