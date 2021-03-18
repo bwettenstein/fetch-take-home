@@ -1,7 +1,7 @@
 const { transactions } = require('../config');
 const {
   searchBalance,
-  addPoints,
+  addPointsToBalanceSheet,
   addBalance,
 } = require('../controllers/balanceController');
 
@@ -24,6 +24,7 @@ exports.sortTransactions = () => {
   return sortedTransactions;
 };
 
+// Adds a singular transaction from a POST request
 exports.addTransaction = (req, res) => {
   const payer = req.header('payer').toUpperCase();
   let points = req.header('points');
@@ -44,7 +45,7 @@ exports.addTransaction = (req, res) => {
   // Check if the name is already present in the balance sheet
   // If it is, then add the points to the existing point total
   // If it isn't, then add it to the balance sheet
-  if (searchBalance(payer)) addPoints(payer, points);
+  if (searchBalance(payer)) addPointsToBalanceSheet(payer, points);
   else {
     addBalance(payer, points);
   }

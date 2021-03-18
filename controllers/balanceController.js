@@ -19,7 +19,7 @@ exports.addBalance = (payer, points) => {
 };
 
 // Add points to balance sheet
-exports.addPoints = (payer, points) => {
+exports.addPointsToBalanceSheet = (payer, points) => {
   const element = this.searchBalance(payer);
   if (element) balance[payer] += points;
 };
