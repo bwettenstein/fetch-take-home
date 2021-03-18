@@ -10,12 +10,18 @@ exports.getTransactions = (req, res) => {
   res.json(transactions);
 };
 
+exports.getSortedTransactions = (req, res) => {
+  const sortedTransactions = this.sortTransactions();
+  return res.json(sortedTransactions);
+};
+
 // Grabs the existing transactions, sorts them by date and time, and returns them
-exports.sortTransactions = (req, res) => {
-  transactions.sort((x, y) => {
+exports.sortTransactions = () => {
+  const sortedTransactions = [...transactions];
+  sortedTransactions.sort((x, y) => {
     return x.timestamp.localeCompare(y.timestamp);
   });
-  res.json(transactions);
+  return sortedTransactions;
 };
 
 exports.addTransaction = (req, res) => {
