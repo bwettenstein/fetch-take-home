@@ -52,3 +52,12 @@ exports.addTransaction = (req, res) => {
 
   return res.json(transaction);
 };
+
+exports.addTransactionFromAddPoints = (payer, points) => {
+  const transaction = {
+    payer: payer.toUpperCase(),
+    points: points,
+    timestamp: new Date().toISOString(),
+  };
+  transactions.push(transaction);
+};
