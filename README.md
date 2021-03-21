@@ -27,7 +27,7 @@ Take home assignment for fetch rewards. The program is run locally through port 
 
 ## URL Endpoints and Route methods 
 Append these endpoints to the URL and make requests from there
-EX - To call the /balance route, you make a GET request to http://localhost:5000/balance
+EX - To call the /balance route, you make a GET request to http://localhost:5000/balance    
  - > /balance
 	 - REQUIRED HEADERS: None
 	 - REQUEST TYPE: GET
