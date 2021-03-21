@@ -7,13 +7,19 @@ const app = express();
 
 app.use(express.json());
 
-// Move these routes to diff router files after this works
+// Balance controller methods
 app.get('/balance', balanceController.getBalance);
+
+// Transaction controller methods
 app.get('/transaction', transactionController.getTransactions);
 app.get('/transaction/sort', transactionController.getSortedTransactions);
+app.get('/transaction/add', transactionController.addTransactionGet);
 app.post('/transaction/add', transactionController.addTransaction);
-app.post('/points/add', pointController.addPoints);
 
-// To run the server locally, if 5000 doesn't work as a port it can be changed
+// Point controller methods
+app.get('/points/spend', pointController.spendPointsGet);
+app.post('/points/spend', pointController.spendPoints);
+
+// Code to run the code locally on a server, if 5000 doesn't work as a port it can be changed
 const port = 5000;
 app.listen(port);

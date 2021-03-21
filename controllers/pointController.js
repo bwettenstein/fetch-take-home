@@ -1,14 +1,20 @@
-const { balance, transactions } = require('../config');
+const { balance } = require('../config');
 const {
   sortTransactions,
   addTransactionFromAddPoints,
 } = require('./transactionController');
-const { addBalance } = require('./balanceController');
+const { changeBalance } = require('./balanceController');
 
-// Requires a points header
-exports.addPoints = (req, res) => {
-  console.log('CALLED');
+// Spends points from POST request passed by the user
+// Goes from the sorted list of transactions and spends the points
+// without bankrupting a payer. Return an error message if there's
+// not enough points to fulfill the request.
+
+// Required Headers:
+// 'points' - An integer that holds the points that will be distributed from payer points
+exports.spendPoints = (req, res) => {
   let points = parseInt(req.header('points'));
+  // Get the sorted transaction sheet in order to start from the oldest points
   const sortedTransactions = sortTransactions();
 
   // Holds the names of the payers with no points in their account
@@ -25,6 +31,7 @@ exports.addPoints = (req, res) => {
       message: 'Req.points must not be empty and must be greater than 0',
     });
 
+  // Iterate through each transaction
   sortedTransactions.forEach((element) => {
     // If points is 0, that means we've successfully distributed all the points so do nothing
     if (points === 0) return;
@@ -81,12 +88,22 @@ exports.addPoints = (req, res) => {
     // Will hold the change in points from the previous point balance, to the current points balance after points were spent
     // We multiply it by negative 1 to show a change. This will get pushed to the transaction sheet
     // EX: The current balance total is 2000 points, 400 were just pulled from a spend call making the difference 400
+    // Therefore, push -400 to the transaction sheet
     const difference = (balance[element] - balanceCopy[element]) * -1;
     // Check if difference isn't 0, if it is that means there is no change so don't push it to transactions
     if (difference !== 0) addTransactionFromAddPoints(element, difference);
 
-    addBalance(element, balanceCopy[element]);
+    changeBalance(element, balanceCopy[element]);
   }
 
-  return res.json({ Success: true, balance });
+  //return res.json({ Success: true, balance });
+  return res.send(balance);
+};
+
+exports.spendPointsGet = (req, res) => {
+  return res.json({
+    Success: false,
+    message:
+      "You must make a post request because this method modifies the transaction and balance sheets. Include, the 'point' header in your request.",
+  });
 };
