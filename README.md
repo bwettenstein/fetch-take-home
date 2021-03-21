@@ -23,11 +23,10 @@ Take home assignment for fetch rewards. The program is run locally through port 
 	or 
 	> nodemon app 
 	> 
-- 	Make the requests to the local URL. By default, the requests will be made to http://localhost:5000
+- 	Make the requests to the local URL. By default, the requests will be made to http://localhost:5000 . Append the endpoints to the URL and make the appropriate requests from there.    
+- EX - To call the /balance route, you make a GET request to http://localhost:5000/balance 
 
-## URL Endpoints and Route methods 
-Append these endpoints to the URL and make requests from there
-EX - To call the /balance route, you make a GET request to http://localhost:5000/balance    
+## URL Endpoints and Route methods   
  - > /balance
 	 - REQUIRED HEADERS: None
 	 - REQUEST TYPE: GET
@@ -50,7 +49,7 @@ EX - To call the /balance route, you make a GET request to http://localhost:5000
 		 - points - An integer that holds the point balance for the payer
 		 - timestamp (optional) - Not required, but if one is passed, it must be passed by ISOString().  If it's not passed, an ISOString() timestamp will be generated
 	 - REQUEST TYPE: POST
-	 - DESCRIPTION: Adds a transaction to the transaction list 
+	 - DESCRIPTION: Adds a transaction to the transaction list. 
  - > /points/spend
 	 - REQUIRED HEADERS: None
 	 - REQUEST TYPE: GET
